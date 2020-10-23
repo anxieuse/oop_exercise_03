@@ -1,0 +1,32 @@
+1) Add figure (type <1 1> to add Octagon, <1 2> - Triangle, <1 3> - Square)
+2) Remove figure
+3) Display elements
+4) Display barycenter of figure
+5) Display points of figure
+6) Display area of figure
+7) Display all information about the figure
+8) Display total area
+9) Exit
+Triangle succesfully added at index 0
+Square succesfully added at index 1
+Square succesfully added at index 2
+Index	Type		Area	Coordinates
+0	Triangle	2	(1, 0), (0, 1), (2, 3)
+1	Square		4	(-1, -1), (-1, 1), (1, 1), (1, -1)
+2	Square		2	(1, 1), (2, 0), (3, 1), (2, 2)
+Triangle info: 
+* Points:	(1, 0), (0, 1), (2, 3)
+* Sides:	1.41421, 3.16228, 2.82843
+* Area:		2
+* Barycenter:	((1, 1.33333)
+Square info: 
+* Points:	(-1, -1), (-1, 1), (1, 1), (1, -1)
+* Sides:	2
+* Area:		4
+* Barycenter:	(0, 0)
+Square info: 
+* Points:	(1, 1), (2, 0), (3, 1), (2, 2)
+* Sides:	1.41421
+* Area:		2
+* Barycenter:	(2.29289, 1.29289)
+Total area: 8

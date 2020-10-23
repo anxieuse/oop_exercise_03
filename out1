@@ -1,0 +1,23 @@
+1) Add figure (type <1 1> to add Octagon, <1 2> - Triangle, <1 3> - Square)
+2) Remove figure
+3) Display elements
+4) Display barycenter of figure
+5) Display points of figure
+6) Display area of figure
+7) Display all information about the figure
+8) Display total area
+9) Exit
+Octagon succesfully added at index 0
+Triangle succesfully added at index 1
+Square succesfully added at index 2
+Octagon succesfully added at index 3
+Index	Type		Area	Coordinates
+0	Octagon		28	(2, 0), (4, 0), (6, 2), (6, 4), (4, 6), (2, 6), (0, 4), (0, 2)
+1	Triangle	0.5	(0, 0), (1, 1), (2, 3)
+2	Square		10000	(0, 100), (100, 0), (100, 100), (0, 0)
+3	Octagon		7	(1, 0), (2, 0), (3, 1), (3, 2), (2, 3), (1, 3), (0, 2), (0, 1)
+Octagon successfully removed
+Index	Type		Area	Coordinates
+0	Triangle	0.5	(0, 0), (1, 1), (2, 3)
+1	Square		10000	(0, 100), (100, 0), (100, 100), (0, 0)
+2	Octagon		7	(1, 0), (2, 0), (3, 1), (3, 2), (2, 3), (1, 3), (0, 2), (0, 1)
