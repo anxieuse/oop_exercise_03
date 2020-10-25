@@ -86,6 +86,7 @@ int main()
             }
             else
             {
+                totalArea -= figures[ID]->Area();
                 std::cout << nameByType[figures[ID]->GetType() - 1] << " successfully removed\n";
                 delete figures[ID];
                 figures.erase(figures.begin() + ID);
