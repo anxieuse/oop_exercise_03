@@ -13,14 +13,14 @@ github.com/anxieuse/oop_exercise_03
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <iomanip>
 
 #include "Point.hpp"
-#include "Figure.hpp"
 #include "Square.hpp"
 #include "Triangle.hpp"
 #include "Octagon.hpp"
 
-void printHelp()
+void printHelp() 
 {
     std::cout << "1) Add figure (type <1 1> to add Octagon, <1 2> - Triangle, <1 3> - Square)\n";
     std::cout << "2) Remove figure\n";
@@ -42,7 +42,8 @@ int main()
 
     bool input = true;
     int cmdID, figureType, ID;
-
+    
+    // "промежуточные" фигуры для считывания и последующего добавления их в вектор
     Square *sampleSq;
     Octagon *sampleOc;
     Triangle *sampleTr;
@@ -58,12 +59,14 @@ int main()
             if (figureType == 1)
             {
                 sampleOc = new Octagon;
+                std::cout << "Введите координаты центра, радиус и угол поворота восьмиугольника\n";
                 std::cin >> *sampleOc;
                 figures.push_back(sampleOc);
             }
             if (figureType == 2)
             {
                 sampleTr = new Triangle;
+                std::cout << "Введите координаты трех точек треугольника\n";
                 std::cin >> *sampleTr;
                 figures.push_back(sampleTr);
             }
@@ -74,7 +77,8 @@ int main()
                 figures.push_back(sampleSq);
             }
             totalArea += figures.back()->Area();
-            std::cout << nameByType[figureType - 1] << " succesfully added at index " << figures.size() - 1 << '\n';
+            if(figures.back()->Area() != 0)
+                std::cout << nameByType[figureType - 1] << " succesfully added at index " << figures.size() - 1 << '\n';
             break;
         }
         case 2: // remove

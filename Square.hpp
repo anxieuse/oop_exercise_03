@@ -29,10 +29,46 @@ public:
     {
         return side * side;
     }
+
+    bool isSquare(Point p1, Point p2, Point p3, Point p4)
+    {
+        int d2 = DistanceSquared(p1, p2); // from p1 to p2
+        int d3 = DistanceSquared(p1, p3); // from p1 to p3
+        int d4 = DistanceSquared(p1, p4); // from p1 to p4
+
+        if (d2 == 0 || d3 == 0 || d4 == 0)
+            return false;
+
+        // Если длины (p1, p2) и (p1, p3) одинаковы, то
+        // для образования квадрата должны быть выполнены следующие условия:
+        // 1) квадрат длины (p1, p4) такой же, как дважды квадрат (p1, p2)
+        // 2) квадрат длины (p2, p3) равен удвоенному квадрату (p2, p4)
+
+        if (d2 == d3 && 2 * d2 == d4 && 2 * DistanceSquared(p2, p4) == DistanceSquared(p2, p3))
+        {
+            return true;
+        }
+
+        if (d3 == d4 && 2 * d3 == d2 && 2 * DistanceSquared(p3, p2) == DistanceSquared(p3, p4))
+        {
+            return true;
+        }
+        if (d2 == d4 && 2 * d2 == d3 && 2 * DistanceSquared(p2, p3) == DistanceSquared(p2, p4))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     std::istream &ReadInfo(std::istream &in)
     {
         in >> A >> B >> C >> D;
-        (*this) = Square(A, B, C, D);
+        if(isSquare(A, B, C, D))
+            (*this) = Square(A, B, C, D);
+        else {
+            std::cout << "You entered not a square :(\n";
+        }
         return in;
     }
     std::ostream &PrintInfo(std::ostream &out) const

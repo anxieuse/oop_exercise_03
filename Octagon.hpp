@@ -1,6 +1,8 @@
 #ifndef OCTAGON_HPP
 #define OCTAGON_HPP
 
+#define pi 3.1415926535897
+
 #include "Figure.hpp"
 
 class Octagon : public Figure
@@ -8,33 +10,26 @@ class Octagon : public Figure
 public:
     Octagon()
     {
-        points.resize(8);
-        std::fill(points.begin(), points.end(), Point{0, 0});
-        sides.resize(8);
-        std::fill(sides.begin(), sides.end(), 0.0);
+        points.resize(8, {0, 0});
+        center = {0, 0};
+        r = 0;
+        angle = 0;
     }
-    Octagon(const std::vector<Point> &pts)
+    Octagon(const Point &_center, const double &_r, const double &_angle)
     {
+        center = _center;
+        r = _r;
+        angle = _angle;
         points.resize(8);
-        points = pts;
-        std::sort(points.begin(), points.end(), byAngle);
-
-        sides.resize(8);
-        for (int i = 1; i < 8; ++i)
-        {
-            sides[i] = sqrt(DistanceSquared(points[i], points[i - 1]));
+        // Построение правильного восьмиугольника путем откладывания радиус-вектора, повернутого на 0, 45, 90, ..., 315 градусов
+        for(int i = 0; i < 8; ++i) {
+            points[i].x = r * cos(2 * pi * i / 8 + angle * pi/180) + center.x;
+            points[i].y = r * sin(2 * pi * i / 8 + angle * pi/180) + center.y;
         }
-        sides[0] = sqrt(DistanceSquared(points[7], points[0]));
     }
     Point Barycenter() const
     {
-        double sumx = 0, sumy = 0;
-        for (auto &pt : points)
-        {
-            sumx += pt.x;
-            sumy += pt.y;
-        }
-        return {sumx / 8.0, sumy / 8.0};
+        return center;
     }
     void PrintCoordinates() const
     {
@@ -58,11 +53,8 @@ public:
     }
     std::istream &ReadInfo(std::istream &in)
     {
-        for (auto &pt : points)
-        {
-            in >> pt;
-        }
-        (*this) = Octagon(points);
+        in >> center.x >> center.y >> r >> angle;
+        *this = Octagon(center, r, angle);
         return in;
     }
     std::ostream &PrintInfo(std::ostream &out) const
@@ -76,16 +68,10 @@ public:
                 out << ", ";
         }
         out << '\n';
-        out << "* Sides:\t";
-        for (int i = 0; i < 8; ++i)
-        {
-            out << sides[i];
-            if (i != 7)
-                out << ", ";
-        }
+        out << "* Side:\t" << 2 * r * sin (pi/8);
         out << '\n';
         out << "* Area:\t\t" << Area() << '\n';
-        out << "* Barycenter:\t" << Barycenter() << '\n';
+        out << "* Barycenter:\t" << center << '\n';
         return out;
     }
     int GetType() const
@@ -95,9 +81,9 @@ public:
     ~Octagon() {}
 
 private:
+    double r, angle;
+    Point center;
     std::vector<Point> points;
-    std::vector<double> sides;
-    double side;
     int type = 1;
 };
 
